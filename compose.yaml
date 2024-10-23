@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/var/lib/mongodb/data
+
+
+volumes:
+  mongo-data:
